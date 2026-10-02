@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Arena</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header>
+            <div class="logo">
+                ♟️ Chess Arena
+            </div>
+
+            <div class="header-status">
+                Multiplayer Chess
+            </div>
+        </header>
+
+        <main>
+
+            <!-- HOME SCREEN -->
+            <section id="homeScreen" class="screen active">
+
+                <div class="hero">
+                    <h1>Chess Arena</h1>
+
+                    <p>
+                        Create a room, invite your players,
+                        and battle through a chess tournament.
+                    </p>
+
+                    <div class="home-buttons">
+                        <button onclick="showHost()">
+                            Create Game
+                        </button>
+
+                        <button class="secondary" onclick="showJoin()">
+                            Join Game
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- HOST SCREEN -->
+            <section id="hostScreen" class="screen">
+
+                <div class="card">
+
+                    <button class="back" onclick="goHome()">
+                        ← Back
+                    </button>
+
+                    <h2>Create Game</h2>
+
+                    <p class="muted">
+                        Create a room for your players.
+                    </p>
+
+                    <label>
+                        Your Name
+                    </label>
+
+                    <input
+                        id="hostName"
+                        type="text"
+                        placeholder="Enter your name"
+                        maxlength="20"
+                    >
+
+                    <button onclick="createGame()">
+                        Create Room
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- JOIN SCREEN -->
+            <section id="joinScreen" class="screen">
+
+                <div class="card">
+
+                    <button class="back" onclick="goHome()">
+                        ← Back
+                    </button>
+
+                    <h2>Join Game</h2>
+
+                    <p class="muted">
+                        Enter the room code from your host.
+                    </p>
+
+                    <label>
+                        Your Name
+                    </label>
+
+                    <input
+                        id="playerName"
+                        type="text"
+                        placeholder="Enter your name"
+                        maxlength="20"
+                    >
+
+                    <label>
+                        Room Code
+                    </label>
+
+                    <input
+                        id="roomCodeInput"
+                        type="text"
+                        placeholder="ABC123"
+                        maxlength="6"
+                    >
+
+                    <button onclick="joinGame()">
+                        Join Room
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- LOBBY SCREEN -->
+            <section id="lobbyScreen" class="screen">
+
+                <div class="lobby">
+
+                    <div class="lobby-top">
+
+                        <div>
+                            <p class="muted">ROOM CODE</p>
+
+                            <div id="roomCodeDisplay" class="room-code">
+                                ------
+                            </div>
+                        </div>
+
+                        <button class="secondary" onclick="copyRoomCode()">
+                            Copy Code
+                        </button>
+
+                    </div>
+
+
+                    <div class="lobby-title">
+
+                        <h2>Waiting Room</h2>
+
+                        <p>
+                            Players join this room before the tournament starts.
+                        </p>
+
+                    </div>
+
+
+                    <div id="playerList" class="players">
+
+                        <!-- Players appear here -->
+
+                    </div>
+
+
+                    <div class="lobby-actions">
+
+                        <button
+                            id="startButton"
+                            onclick="startRound()"
+                        >
+                            Start Round
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MATCH SCREEN -->
+            <section id="matchScreen" class="screen">
+
+                <div class="match">
+
+                    <div class="match-header">
+
+                        <div class="player player-white">
+                            <span id="whiteName">
+                                Player 1
+                            </span>
+
+                            <small>WHITE</small>
+                        </div>
+
+                        <div class="vs">
+                            VS
+                        </div>
+
+                        <div class="player player-black">
+                            <span id="blackName">
+                                Player 2
+                            </span>
+
+                            <small>BLACK</small>
+                        </div>
+
+                    </div>
+
+
+                    <div id="turnDisplay" class="turn">
+                        Player 1's turn
+                    </div>
+
+
+                    <div class="chess-board">
+
+                        <!-- Temporary board -->
+                        <div class="square dark">♜</div>
+                        <div class="square light">♞</div>
+                        <div class="square dark">♝</div>
+                        <div class="square light">♛</div>
+                        <div class="square dark">♚</div>
+                        <div class="square light">♝</div>
+                        <div class="square dark">♞</div>
+                        <div class="square light">♜</div>
+
+                        <div class="square light">♟</div>
+                        <div class="square dark">♟</div>
+                        <div class="square light">♟</div>
+                        <div class="square dark">♟</div>
+                        <div class="square light">♟</div>
+                        <div class="square dark">♟</div>
+                        <div class="square light">♟</div>
+                        <div class="square dark">♟</div>
+
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+
+                        <div class="square dark">♙</div>
+                        <div class="square light">♙</div>
+                        <div class="square dark">♙</div>
+                        <div class="square light">♙</div>
+                        <div class="square dark">♙</div>
+                        <div class="square light">♙</div>
+                        <div class="square dark">♙</div>
+                        <div class="square light">♙</div>
+
+                        <div class="square light">♖</div>
+                        <div class="square dark">♘</div>
+                        <div class="square light">♗</div>
+                        <div class="square dark">♕</div>
+                        <div class="square light">♔</div>
+                        <div class="square dark">♗</div>
+                        <div class="square light">♘</div>
+                        <div class="square dark">♖</div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
